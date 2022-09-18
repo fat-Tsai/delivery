@@ -1,0 +1,54 @@
+POST http://localhost:9979/employee/login?username=admin&password=123456
+
+<> 2022-09-18T130823.400.json
+
+###
+
+POST http://localhost:9979/employee/login?username=admin&password=123456
+
+<> 2022-09-18T112733.400.json
+
+###
+
+POST http://localhost:9979/employee/login?username=admin&password=123456
+
+<> 2022-09-18T112727.400.json
+
+###
+
+POST http://localhost:9979/employee/login
+
+<> 2022-09-18T112607.400.json
+
+###
+
+POST http://localhost:9979/employee/login
+
+<> 2022-09-18T111221.400.json
+
+###
+
+POST http://localhost:9979/employee/login
+
+<> 2022-09-18T110630.415.json
+
+###
+
+POST http://localhost:9979/employee/login
+
+<> 2022-09-18T110417.415.json
+
+###
+
+POST http://localhost:9979/employee/login
+
+<> 2022-09-18T105956.400.json
+
+###
+
+POST http://localhost:9979/employee/login
+
+<> 2022-09-18T105849.400.json
+
+###
+
