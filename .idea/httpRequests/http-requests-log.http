@@ -1,3 +1,21 @@
+POST http://localhost:9979/employee/logout
+
+<> 2022-09-20T085639.200.json
+
+###
+
+POST http://localhost:9979/employee/logout
+
+<> 2022-09-20T085222.404.json
+
+###
+
+POST http://localhost:9979/employee/logout
+
+<> 2022-09-20T084306.404.json
+
+###
+
 POST http://localhost:9979/employee/login?username=admin&password=123456
 
 <> 2022-09-18T130823.400.json
