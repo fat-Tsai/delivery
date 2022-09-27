@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d7363ad-d765-44db-baff-580b3aef5d3e" name="Changes" comment="项目搭建">
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+    <list default="true" id="4d7363ad-d765-44db-baff-580b3aef5d3e" name="Changes" comment="退出功能完成">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/filter/LoginChechFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/DelivaryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/DelivaryApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/EmployeeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +89,7 @@
       <recent name="D:\毕设\delivery\delivery\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.generated-requests | #7">
+  <component name="RunManager" selected="Spring Boot.DelivaryApplication">
     <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="4" requestIdentifier="#4" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -117,8 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.generated-requests | #7" />
         <item itemvalue="Spring Boot.DelivaryApplication" />
+        <item itemvalue="HTTP Request.generated-requests | #7" />
         <item itemvalue="HTTP Request.generated-requests | #6" />
         <item itemvalue="HTTP Request.generated-requests | #5" />
         <item itemvalue="HTTP Request.generated-requests | #4" />
@@ -137,7 +137,14 @@
       <workItem from="1663202773424" duration="7293000" />
       <workItem from="1663308178120" duration="12767000" />
       <workItem from="1663468288028" duration="9877000" />
-      <workItem from="1663633636897" duration="2052000" />
+      <workItem from="1663633636897" duration="4246000" />
+      <workItem from="1663662698960" duration="617000" />
+      <workItem from="1663723696032" duration="7965000" />
+      <workItem from="1663894879467" duration="614000" />
+      <workItem from="1663918627018" duration="1618000" />
+      <workItem from="1664066045686" duration="1680000" />
+      <workItem from="1664153909200" duration="631000" />
+      <workItem from="1664237714349" duration="4259000" />
     </task>
     <task id="LOCAL-00001" summary="项目搭建">
       <created>1663208102366</created>
@@ -146,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663208102366</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="退出功能完成">
+      <created>1663635890184</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1663635890184</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +179,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="项目搭建" />
-    <option name="LAST_COMMIT_MESSAGE" value="项目搭建" />
+    <MESSAGE value="退出功能完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="退出功能完成" />
   </component>
 </project>

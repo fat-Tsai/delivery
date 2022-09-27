@@ -3,6 +3,7 @@ package com.tsai;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
 /***
  * 配置启动类 SpringBootApplication
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @Slf4j
 @SpringBootApplication
+@ServletComponentScan
 public class DelivaryApplication {
     public static void main(String[] args) {
         SpringApplication.run(DelivaryApplication.class,args);
