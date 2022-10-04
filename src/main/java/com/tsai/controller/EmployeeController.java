@@ -130,7 +130,7 @@ public class EmployeeController {
      * @param employee
      * @return
      */
-    @PostMapping("/changeStatus")
+    @PutMapping()
     public R<String> update(HttpServletRequest request, @RequestBody Employee employee) {
         Long empId = (Long)request.getSession().getAttribute("employee");
 
@@ -140,9 +140,18 @@ public class EmployeeController {
         return R.success("员工状态修改成功");
     }
 
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public R<Employee> getById(@PathVariable Long id) {
+        // 缺少PathVariable，会导致接口报错405/404，AxiosError
         Employee employee = employeeService.getById(id);
-        return R.success(employee);
+        if(employee != null) {
+            return R.success(employee);
+        }
+        return R.error("没有查询到对应员工信息");
     }
 }
