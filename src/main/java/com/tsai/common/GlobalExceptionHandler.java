@@ -20,7 +20,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class GlobalExceptionHandler {
 
     /**
-     * 异常梳理方法
+     * Duplicate entry异常梳理方法
      * @return
      */
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
@@ -30,9 +30,20 @@ public class GlobalExceptionHandler {
          * 正常逻辑：应该在前端输入完之后用校验器校验
          */
         if(ex.getMessage().contains("Duplicate entry")) {
-            String msg = "该账号已存在";
+            String[] split = ex.getMessage().split(" ");
+            String msg = split[2] + "已存在";
             return R.error(msg);
         }
         return R.error("未知错误");
+    }
+
+    /**
+     * 删除分类时的异常处理
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(CustomException.class)
+    public R<String> exceptionHandler(CustomException ex) {
+        return R.error(ex.getMessage());
     }
 }

@@ -55,6 +55,7 @@ public class LoginChechFilter implements Filter {
         if (request.getSession().getAttribute("employee") != null) {
             Long empId = (Long) request.getSession().getAttribute("employee");
             BaseContext.setCurrentId(empId);
+            log.info("setCurrentId:{}",empId);
             filterChain.doFilter(request,response);
             return;
         }
