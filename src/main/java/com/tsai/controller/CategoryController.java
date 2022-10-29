@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 分类管理
  */
@@ -75,5 +77,19 @@ public class CategoryController {
             return R.success("菜品信息修改成功");
         }
         return R.error("菜品修改失败");
+    }
+
+    /**
+     * 根据条件查询分类，菜品分类|套餐分类
+     * @param category
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Category>> list(Category category) {
+        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(category.getType() != null, Category::getType,category.getType());
+        queryWrapper.orderByAsc(Category::getSort).orderByDesc((Category::getUpdateTime));
+        List<Category> list = categoryService.list(queryWrapper);
+        return R.success(list);
     }
 }

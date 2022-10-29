@@ -1,3 +1,29 @@
+POST http://localhost:9979/dish/status/{{0}}
+
+###
+
+POST http://localhost:9979/dish/status/{{0}}
+
+###
+
+POST http://localhost:9979/dish/status/{{0}}
+
+###
+
+POST http://localhost:9979/dish/status/0
+
+<> 2022-10-29T104005.200.txt
+
+###
+
+POST http://localhost:9979/dish/status/{{status}}
+
+###
+
+POST http://localhost:9979/dish/status/{{status}}
+
+###
+
 GET http://localhost:9979/employee/page
 
 <> 2022-09-28T174958.200.txt

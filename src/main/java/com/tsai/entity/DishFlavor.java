@@ -5,39 +5,27 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * 菜品
+ * 菜品口味表
  */
 @Data
-public class Dish implements Serializable {
+public class DishFlavor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private  static final long serialVersionUID = 1L;
 
     private Long id;
 
+    private Long dishId;
+
+    // 口味名称：甜度、辣度等
     private String name;
 
-    // 菜品分类id
-    private Long categoryId;
+    // 口味数据
+    private String value;
 
-    private BigDecimal price;
-
-    // 商品码
-    private String code;
-
-    private String image;
-
-    private String description;
-
-    // 0-停售  1-起售
-    private Integer status;
-
-    private Integer sort;
-
-    //是否删除
+    // 逻辑删除标志位
     private Integer isDeleted;
 
     @TableField(fill = FieldFill.INSERT)
@@ -51,4 +39,5 @@ public class Dish implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateUser;
+
 }

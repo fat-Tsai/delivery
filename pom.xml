@@ -48,13 +48,13 @@
       <artifactId>mybatis-plus-boot-starter</artifactId>
       <version>3.4.2</version>
     </dependency>
-
+<!--lombok注解式代码生成-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.20</version>
     </dependency>
-
+<!--fastjson序列化库-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>

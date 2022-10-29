@@ -38,7 +38,9 @@ public class LoginChechFilter implements Filter {
         // 定义不需要处理的请求路径
         String[] urls = new String[] {
                 "/employee/login",
-                "/employee/logout"
+                "/employee/logout",
+                "/common/upload",
+                "common/download"
         };
 
         // 2.判断本次处理是否需要登录
