@@ -158,4 +158,26 @@ public class DishController {
         }
         return R.success("菜品删除成功");
     }
+
+    /**
+     * 按照条件，查询某个菜品分类的详细菜品列表
+     * @param dish
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Dish>> list(Dish dish) {
+        // 构造条件构造器
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+        // 获取菜品id
+        queryWrapper.eq(dish.getCategoryId() != null,Dish::getCategoryId,dish.getCategoryId());
+        // 正在售卖
+        queryWrapper.eq(Dish::getStatus,1);
+        // 查询条件
+        queryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+
+        // 执行
+        List<Dish> list = dishService.list(queryWrapper);
+
+        return R.success(list);
+    }
 }
