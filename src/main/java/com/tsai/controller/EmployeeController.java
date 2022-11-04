@@ -3,16 +3,21 @@ package com.tsai.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tsai.common.R;
+import com.tsai.dto.EmployeeDto;
 import com.tsai.entity.Employee;
 import com.tsai.service.EmployeeService;
+import com.tsai.utils.JWTUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils; // 注意：这里的包文件是apache,apache才有isNotEmpty
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -30,7 +35,7 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/login")
-    public R<Employee> login(HttpServletRequest request, @RequestBody Employee employee ) {
+    public R<EmployeeDto> login(HttpServletRequest request, @RequestBody Employee employee ) {
         // 1. 将页面提交的密码 password 进行MD5加密处理
         String password = employee.getPassword();
         password = DigestUtils.md5DigestAsHex(password.getBytes());
@@ -47,7 +52,7 @@ public class EmployeeController {
 
         // 4. 密码比对，如果不一致返回登录失败结果
         if(!emp.getPassword().equals(password)) {
-            return R.error("登录失败");
+            return R.error("密码错误");
         }
 
         // 5. 查看员工状态，如果为已禁用状态，则返回员工已禁用结果
@@ -56,17 +61,30 @@ public class EmployeeController {
         }
 
         // 让我看看这个是啥
-        // log.info("id: {}",emp.getId()); 这个打印出来就是employee的表
+//         log.info("id: {}",emp.getId()); 这个打印出来就是employee的表
 
-        // 6. 登录成功，将用户id存入session并返回登录成功结果
-        request.getSession().setAttribute("employee",emp.getId());
-        return R.success(emp);
+        // 6. 登录成功，将用户id存入session并返回登录成功结果  -- 废弃
+//        request.getSession().setAttribute("employee",emp.getId());
+
+        // 6.登录成功,生成JWT的令牌
+        Map<String,String> map = new HashMap<>();
+        map.put("username",emp.getUsername());
+        map.put("userId", String.valueOf(emp.getId())); // token不能放敏感类型的信息
+        log.info("emp:{}",emp.toString());
+        // 生成token
+        String token = JWTUtils.getToken(map);
+        // 将token放入返回结果
+        EmployeeDto employeeDto = new EmployeeDto();
+        BeanUtils.copyProperties(emp,employeeDto);
+        employeeDto.setToken(token);
+
+        return R.success(employeeDto);
     }
 
     @PostMapping("/logout")
     public R<String> logout(HttpServletRequest request) {
         // 清除Session中保存的当前登录的员工id
-        request.getSession().removeAttribute("employee");
+//        request.getSession().removeAttribute("employee");
         return R.success("退出成功");
     }
 
