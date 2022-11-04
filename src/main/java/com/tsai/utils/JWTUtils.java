@@ -20,6 +20,8 @@ public class JWTUtils {
 
     private static String SIGN = "fatTsai9979";
 
+    // token可以绑定IP，这样的安全性更高，IP地址和上次不一致就要重定向到登陆页面，如果一致，无痛刷新
+
     /**
      * 生成token header.payload.signature
      * @param map
@@ -28,7 +30,7 @@ public class JWTUtils {
     public static String getToken(Map<String,String> map) {
         log.info("SIGN:{}",SIGN);
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.SECOND, 60*60*24); // 默认五分钟过期
+        instance.add(Calendar.SECOND, 60*60*7); // 默认五分钟过期
 
         // 创建jwt builder
         JWTCreator.Builder builder = JWT.create();

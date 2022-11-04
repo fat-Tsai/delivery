@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d7363ad-d765-44db-baff-580b3aef5d3e" name="Changes" comment="退出功能完成">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/dto/EmployeeDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/interceptors/JWTInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/utils/JWTUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/tsai/delivery/DeliveryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/common/MyMetaObjectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/common/MyMetaObjectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/config/WebMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/common/BaseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/common/BaseContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/common/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/common/R.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/filter/LoginChechFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/filter/LoginChechFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/service/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/service/impl/EmployeeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/interceptors/JWTInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/interceptors/JWTInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/utils/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/utils/JWTUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/tsai/delivery/DeliveryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/tsai/delivery/DeliveryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +177,7 @@
       <workItem from="1667174919761" duration="7948000" />
       <workItem from="1667261336697" duration="14359000" />
       <workItem from="1667311116451" duration="43016000" />
-      <workItem from="1667521142368" duration="5788000" />
+      <workItem from="1667521142368" duration="10778000" />
     </task>
     <task id="LOCAL-00001" summary="项目搭建">
       <created>1663208102366</created>

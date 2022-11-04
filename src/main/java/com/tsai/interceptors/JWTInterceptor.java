@@ -26,24 +26,26 @@ public class JWTInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Map<String,Object> map = new HashMap<>();
+
         String token = request.getHeader("token");
 
         log.info("拦截到请求： {}", request.getRequestURI()); // URI指的是controller中的接口
         log.info("拦截到请求： {}", request.getRequestURL()); // URL指的是完整的接口：网址+端口+接口
         System.out.println("执行了拦截器的preHandle方法");
 
-        Long tokenId = JWTUtils.getTokenId(token);
-        BaseContext.setCurrentId(tokenId);
+        Map<String,Object> map = new HashMap<>();
 
         try {
             JWTUtils.verify(token);
+            Long tokenId = JWTUtils.getTokenId(token);
+            BaseContext.setCurrentId(tokenId);
             return true;
         } catch (SignatureVerificationException e) {
             map.put("msg", "签名不一致");
         } catch (TokenExpiredException e) {
             e.printStackTrace();
-            map.put("msg", "令牌过期");
+            map.put("code", 401);
+            map.put("msg", "token过期");
         } catch (AlgorithmMismatchException e) {
             map.put("msg", "算法不匹配");
         } catch (InvalidClaimException e) {
@@ -52,12 +54,11 @@ public class JWTInterceptor implements HandlerInterceptor {
             map.put("msg", "token无效");
         }
 
-        map.put("state",false); // 设置状态
         // 把map用JSON形式往后传
-//        String json = new ObjectMapper().writeValueAsString(map);
-//        log.info("json:{}",json);
-//        response.setContentType("application/json;charset=UTF-8");
-//        response.getWriter().println(json);
+        String json = new ObjectMapper().writeValueAsString(map);
+        log.info("json:{}",json);
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(json);
 
         return false;
     }

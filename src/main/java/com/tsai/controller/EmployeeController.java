@@ -81,6 +81,11 @@ public class EmployeeController {
         return R.success(employeeDto);
     }
 
+    /**
+     * 用户退出登录
+     * @param request
+     * @return
+     */
     @PostMapping("/logout")
     public R<String> logout(HttpServletRequest request) {
         // 清除Session中保存的当前登录的员工id

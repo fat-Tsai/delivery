@@ -14,7 +14,7 @@ public class DeliveryTest {
      */
     @Test
     public void test () {
-        Long tokenId = JWTUtils.getTokenId("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njc1ODA0NjQsInVzZXJJZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIn0.gAH6-3_xtThCGO5HPtSU2DbJTKjaKSIq_4psovYJ2GY");
+        Long tokenId = JWTUtils.getTokenId("eJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njc1ODA0NjQsInVzZXJJZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIn0.gAH6-3_xtThCGO5HPtSU2DbJTKjaKSIq_4psovYJ2GY");
         System.out.println("token中取到的id: "+tokenId);
 
         BaseContext.setCurrentId(tokenId);
