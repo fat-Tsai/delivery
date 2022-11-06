@@ -10,6 +10,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,7 +31,8 @@ public class JWTUtils {
     public static String getToken(Map<String,String> map) {
         log.info("SIGN:{}",SIGN);
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.SECOND, 60*60*7); // 默认五分钟过期
+
+        instance.add(Calendar.SECOND, 60*60*2); // 默认两小时过期
 
         // 创建jwt builder
         JWTCreator.Builder builder = JWT.create();
