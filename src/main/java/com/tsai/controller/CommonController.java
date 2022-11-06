@@ -1,5 +1,6 @@
 package com.tsai.controller;
 
+import com.tsai.utils.QiniuUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 @Slf4j
@@ -25,29 +27,31 @@ public class CommonController {
     private String basePath;
 
     @PostMapping("/upload")
-    public R<String> upload(MultipartFile file) {
-        log.info("file的信息在这里:{}", file.toString());
+    public R<String> upload(MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();
         log.info("原始文件名： {}",originalFilename);
+
         // 文件后缀
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
         //使用UUID重新生成文件名，防止文件名称重复造成文件覆盖
         String fileName = UUID.randomUUID().toString() + suffix;//dfsdfdfd.jpg
         // 待优化：上传到服务器
-        //创建一个目录对象
-        File dir = new File(basePath);
-        //判断当前目录是否存在
-        if(!dir.exists()){
-            //目录不存在，需要创建
-            dir.mkdirs();
-        }
-
-        try {
-            //将临时文件转存到指定位置
-            file.transferTo(new File(basePath + fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // 上传到服务器
+        QiniuUtils.upload2Qiniu(file.getBytes(),fileName);
+//        //创建一个目录对象
+//        File dir = new File(basePath);
+//        //判断当前目录是否存在
+//        if(!dir.exists()){
+//            //目录不存在，需要创建
+//            dir.mkdirs();
+//        }
+//
+//        try {
+//            //将临时文件转存到指定位置
+//            file.transferTo(new File(basePath + fileName));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         return R.success(fileName);
 
     }
@@ -83,4 +87,5 @@ public class CommonController {
             e.printStackTrace();
         }
     }
+
 }
