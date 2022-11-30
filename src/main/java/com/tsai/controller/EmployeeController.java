@@ -60,19 +60,15 @@ public class EmployeeController {
             return R.error("账号已禁用");
         }
 
-        // 让我看看这个是啥
-//         log.info("id: {}",emp.getId()); 这个打印出来就是employee的表
-
         // 6. 登录成功，将用户id存入session并返回登录成功结果  -- 废弃
 //        request.getSession().setAttribute("employee",emp.getId());
 
         // 6.登录成功,生成JWT的令牌
         Map<String,String> map = new HashMap<>();
-        map.put("username",emp.getUsername());
-        map.put("userId", String.valueOf(emp.getId())); // token不能放敏感类型的信息
-        log.info("emp:{}",emp.toString());
+//        map.put("username",emp.getUsername());
+        map.put("id", String.valueOf(emp.getId())); // token不能放敏感类型的信息
         // 生成token
-        String token = JWTUtils.getToken(map);
+        String token = JWTUtils.getToken(map,"pc");
         // 将token放入返回结果
         EmployeeDto employeeDto = new EmployeeDto();
         BeanUtils.copyProperties(emp,employeeDto);

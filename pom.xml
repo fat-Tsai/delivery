@@ -25,7 +25,24 @@
   <url>http://www.example.com</url>
 <!--依赖-->
   <dependencies>
-
+    <!--  annotation prefix  -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!--  启用热重载  -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!--  hutool包  -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.8.9</version>
+    </dependency>
     <!-- 集合七牛云完成图片的上传下载   -->
     <dependency>
       <groupId>com.qiniu</groupId>
@@ -146,6 +163,17 @@
     <finalName>delivery</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+        <!--  热重载插件      -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+            <!--fork :  如果没有该项配置devtools不会起作用，即应用不会restart -->
+            <fork>true</fork>
+            <!--支持静态文件热部署-->
+            <addResources>true</addResources>
+          </configuration>
+        </plugin>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>

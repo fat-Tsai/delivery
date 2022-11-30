@@ -35,6 +35,13 @@ public class R<T> {
         return r;
     }
 
+    public static <T> R<T> error(Map map) {
+        R r = new R();
+        r.msg = (String) map.get("msg");
+        r.code = (Integer) map.get("code");
+        return r;
+    }
+
 
     public R<T> add(String key, Object value) {
         this.map.put(key,value);

@@ -3,13 +3,22 @@ package com.tsai.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tsai.common.R;
+import com.tsai.dto.CategoryDto;
+import com.tsai.dto.DishDto;
+import com.tsai.dto.SetmealDto;
 import com.tsai.entity.Category;
+import com.tsai.entity.Dish;
+import com.tsai.entity.Setmeal;
 import com.tsai.service.CategoryService;
+import com.tsai.service.DishService;
+import com.tsai.service.SetmealService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 分类管理
@@ -21,6 +30,12 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private DishService dishService;
+
+    @Autowired
+    private SetmealService setmealService;
 
     /**
      * 新增分类
@@ -49,6 +64,8 @@ public class CategoryController {
         queryWrapper.orderByAsc(Category::getSort);
         // 执行查询
         categoryService.page(pageInfo,queryWrapper);
+
+        // 现在出现一个问题，我不知道这个分类下面有没有菜品，所以需要返回这个分类下拥有的菜品总数 2022.11.27
 
         return R.success(pageInfo);
     }
@@ -85,11 +102,27 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/list")
-    public R<List<Category>> list(Category category) {
+    public R<List<CategoryDto>> list(Category category) {
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(category.getType() != null, Category::getType,category.getType());
         queryWrapper.orderByAsc(Category::getSort).orderByDesc((Category::getUpdateTime));
         List<Category> list = categoryService.list(queryWrapper);
-        return R.success(list);
+        List<CategoryDto> categoryDtoList = list.stream().map((item) -> {
+            CategoryDto categoryDto = new CategoryDto();
+            BeanUtils.copyProperties(item,categoryDto);
+            Long categoryId = item.getId();
+            Integer type = item.getType();
+            if(type == 1) {
+                List<DishDto> dishDtoList = dishService.getListByCategoryId(categoryId);
+                categoryDto.setDishList(dishDtoList);
+                categoryDto.setTotal(dishDtoList.size());
+            } else {
+                List<SetmealDto> setmealDtoList = setmealService.getListByCategoryId(categoryId);
+                categoryDto.setSetmealList(setmealDtoList);
+                categoryDto.setTotal(setmealDtoList.size());
+            }
+            return categoryDto;
+        }).collect(Collectors.toList());
+        return R.success(categoryDtoList);
     }
 }

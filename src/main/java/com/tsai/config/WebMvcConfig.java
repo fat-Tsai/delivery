@@ -3,10 +3,12 @@ package com.tsai.config;
 import com.tsai.common.JacksonObjectMapper;
 import com.tsai.interceptors.JWTInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @Slf4j
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
 //    /**
 //     * 设置静态资源映射
 //     * @param registry
@@ -33,13 +36,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
         InterceptorRegistration registration = registry.addInterceptor(new JWTInterceptor());
         registration.addPathPatterns("/**"); // 拦截所有路径
         registration.excludePathPatterns( // 不需要拦截的路径
                 "/employee/login",
                 "/employee/logout",
                 "/common/upload",
-                "/common/download"
+                "/common/download",
+                "/user/wxLogin"
         );
         WebMvcConfigurer.super.addInterceptors(registry);
     }

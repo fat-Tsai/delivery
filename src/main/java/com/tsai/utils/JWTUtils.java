@@ -28,11 +28,14 @@ public class JWTUtils {
      * @param map
      * @return
      */
-    public static String getToken(Map<String,String> map) {
+    public static String getToken(Map<String,String> map,String type) {
         log.info("SIGN:{}",SIGN);
         Calendar instance = Calendar.getInstance();
-
-        instance.add(Calendar.SECOND, 60*60*2); // 默认两小时过期
+        if (type.equals("pc")) {
+            instance.add(Calendar.SECOND, 60*60*2); // 默认两小时过期
+        }else {
+            instance.add(Calendar.DATE, 7); // 默认一周过期
+        }
 
         // 创建jwt builder
         JWTCreator.Builder builder = JWT.create();
@@ -62,7 +65,7 @@ public class JWTUtils {
      */
     public static Long getTokenId(String token) {
         DecodedJWT verify = JWT.require(Algorithm.HMAC256(SIGN)).build().verify(token);
-        Long id = Long.valueOf(verify.getClaim("userId").asString());
+        Long id = Long.valueOf(verify.getClaim("id").asString());
         return id;
     }
 }

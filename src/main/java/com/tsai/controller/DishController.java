@@ -6,6 +6,8 @@ import com.tsai.common.R;
 import com.tsai.dto.DishDto;
 import com.tsai.entity.Category;
 import com.tsai.entity.Dish;
+import com.tsai.entity.DishFlavor;
+import com.tsai.entity.Flavor;
 import com.tsai.service.CategoryService;
 import com.tsai.service.DishFlavorService;
 import com.tsai.service.DishService;
@@ -165,19 +167,51 @@ public class DishController {
      * @return
      */
     @GetMapping("/list")
-    public R<List<Dish>> list(Dish dish) {
-        // 构造条件构造器
-        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
-        // 获取菜品id
-        queryWrapper.eq(dish.getCategoryId() != null,Dish::getCategoryId,dish.getCategoryId());
-        // 正在售卖
-        queryWrapper.eq(Dish::getStatus,1);
-        // 查询条件
-        queryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
-
-        // 执行
-        List<Dish> list = dishService.list(queryWrapper);
+    public R<List<DishDto>> list(Dish dish) {
+        Long id = dish.getCategoryId();
+        List<DishDto> list = dishService.getListByCategoryId(id);
+//        // 构造条件构造器
+//        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+//        // 获取菜品id
+//        queryWrapper.eq(dish.getCategoryId() != null,Dish::getCategoryId,dish.getCategoryId());
+//        // 正在售卖
+//        queryWrapper.eq(Dish::getStatus,1);
+//        // 查询条件
+//        queryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+//
+//        // 执行
+//        List<Dish> list = dishService.list(queryWrapper);
+//
+//        // 添加口味返回数据，适配用户端
+//        List<DishDto> dishDtoList = list.stream().map((item) -> {
+//            DishDto dishDto = new DishDto();
+//            BeanUtils.copyProperties((item),dishDto);
+//            Long categoryId = item.getCategoryId();
+//            Category category = categoryService.getById(categoryId);
+//            if(category != null) {
+//                String categoryName = category.getName();
+//                dishDto.setCategoryName(categoryName);
+//            }
+//            // 当前菜品的id
+//            Long dishId = item.getId();
+//            LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+//            lambdaQueryWrapper.eq(DishFlavor::getDishId,dishId);
+//            List<DishFlavor> dishFlavorList = dishFlavorService.list(lambdaQueryWrapper);
+//            dishDto.setFlavors(dishFlavorList);
+//            return dishDto;
+//        }).collect(Collectors.toList());
 
         return R.success(list);
+    }
+
+    /**
+     * 返回指定菜品的口味
+     * @param dishId
+     * @return
+     */
+    @GetMapping("/getFlavor")
+    public R<List<Flavor>> getFalvors(@RequestParam(value = "id") Long dishId) {
+        List<Flavor> flavorList = dishService.getEasyFlavorList(dishId);
+        return R.success(flavorList);
     }
 }

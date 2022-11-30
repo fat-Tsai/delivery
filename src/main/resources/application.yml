@@ -27,5 +27,11 @@ mybatis-plus:
 reggie:
   path: D:\img\
 
-# jwt密钥
 tokenKey: fatTsai9979
+
+weixin:
+  appid: wxd06fd877a3485e08
+  secret: 8cbf683133e689f4340ecb6e5b5869a6
+  getPhoneNumberUrl: https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=
+  getAccessTokenUrl: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&
+  jscode2sessionUrl: https://api.weixin.qq.com/sns/jscode2session

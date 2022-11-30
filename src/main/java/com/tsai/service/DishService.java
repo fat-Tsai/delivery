@@ -3,6 +3,7 @@ package com.tsai.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tsai.dto.DishDto;
 import com.tsai.entity.Dish;
+import com.tsai.entity.Flavor;
 
 import java.util.List;
 
@@ -22,4 +23,9 @@ public interface DishService extends IService<Dish> {
 
     // 批量更新菜品售卖状态
     public void updateState(List<Long> list, int status);
+
+    List<DishDto> getListByCategoryId(Long id);
+
+    // 返回简单的口味类型
+    List<Flavor> getEasyFlavorList(Long dishId);
 }

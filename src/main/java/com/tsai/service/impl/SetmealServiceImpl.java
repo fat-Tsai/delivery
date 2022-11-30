@@ -111,4 +111,25 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper,Setmeal> imple
         setmealDishService.remove(setmealDishLambdaQueryWrapper);
     }
 
+    @Override
+    public List<SetmealDto> getListByCategoryId(Long id) {
+        LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(id != null, Setmeal::getCategoryId, id);
+        queryWrapper.eq(Setmeal::getStatus, 1);
+        queryWrapper.orderByDesc(Setmeal::getUpdateTime);
+        List<Setmeal> list = this.list(queryWrapper);
+
+        List<SetmealDto> setmealDtoList = list.stream().map((item) -> {
+            SetmealDto setmealDto = new SetmealDto();
+            BeanUtils.copyProperties((item),setmealDto);
+            Long setmealId = item.getId();
+            LambdaQueryWrapper<SetmealDish> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+            lambdaQueryWrapper.eq(SetmealDish::getSetmealId, setmealId);
+            List<SetmealDish> setmealDishList = setmealDishService.list(lambdaQueryWrapper);
+            setmealDto.setSetmealDishes(setmealDishList);
+            return setmealDto;
+        }).collect(Collectors.toList());
+        return setmealDtoList;
+    }
+
 }

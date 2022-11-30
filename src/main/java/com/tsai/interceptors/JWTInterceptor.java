@@ -51,7 +51,9 @@ public class JWTInterceptor implements HandlerInterceptor {
         } catch (InvalidClaimException e) {
             map.put("msg", "失效的payload");
         } catch (Exception e) {
-            map.put("msg", "token无效");
+            e.printStackTrace();
+            map.put("code",500);
+            map.put("msg", "请求出错");
         }
 
         // 把map用JSON形式往后传
@@ -59,6 +61,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         log.info("json:{}",json);
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(json);
+        response.setStatus((Integer) map.get("code"));
 
         return false;
     }
