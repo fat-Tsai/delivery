@@ -97,6 +97,7 @@ public class UserController {
             user.setPhone(phoneNumber);
             user.setCreateTime(LocalDateTime.now());
             userService.save(user);
+            System.out.println("让我打印一下userId看看是何方神圣"+String.valueOf(user.getId()));
             // 获取token
             Map<String,String> map = new HashMap<>();
             map.put("id", String.valueOf(user.getId())); // token不能放敏感类型的信息
@@ -107,7 +108,8 @@ public class UserController {
 //             无痛刷新token
             long id = userServiceOne.getId();
             Map<String,String> map = new HashMap<>();
-            map.put("id", String.valueOf(user.getId())); // token不能放敏感类型的信息
+            map.put("id", String.valueOf(id)); // token不能放敏感类型的信息
+            System.out.println("让我打印一下userId看看是何方神圣"+String.valueOf(id));
             // 生成token
             String token = JWTUtils.getToken(map,"wx");
             return R.success(token);
