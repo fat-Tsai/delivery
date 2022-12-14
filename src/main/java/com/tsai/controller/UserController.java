@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -159,5 +160,53 @@ public class UserController {
     @PostMapping("/test")
     public R<String> test(String code) {
         return R.success(code);
+    }
+
+    /**
+     * 获取用户手机号
+     * @param request
+     * @param code
+     * @return
+     */
+    @GetMapping("/phone")
+    public R<String> getPhone(HttpServletRequest request,String code) {
+        String token = request.getHeader("token");
+        Long userId = JWTUtils.getTokenId(token);
+        // 先判断数据库中是否有手机号
+        User user = userService.getById(userId);
+        String phone = user.getPhone();
+        if(phone != null) {
+            return R.success(phone);
+        }else {
+            // 服务器去微信获取手机号
+            // 先获取 access_token
+            String url = getAccessTokenUrl + "appid=" + appid + "&secret=" + secret;
+            System.out.println("获取access_token的url:"+url);
+            String res = HttpUtil.get(url);
+            JSONObject jsonObject = JSON.parseObject(res);
+            // 取值 access_token 和 expires 有效时间
+            String access_token = jsonObject.get("access_token").toString();
+            System.out.println("access_token："+access_token);
+            String expires_in = jsonObject.get("expires_in").toString();
+
+            // 请求手机号: 用 token换手机号
+            String urlPhone = getPhoneNumberUrl + access_token;
+            HashMap<String, Object> paramMap = new HashMap<>();
+            paramMap.put("code", code);
+            String resPhone = HttpUtil.post(urlPhone, paramMap);
+            JSONObject jsonObjectPhone = JSON.parseObject(resPhone);
+            Integer errcode = Integer.parseInt(jsonObjectPhone.get("errcode").toString());
+            if(errcode == 0) {
+                Object phone_info = jsonObjectPhone.get("phone_info");
+                JSONObject phoneInfo = JSON.parseObject(String.valueOf(phone_info));
+                String phoneNumber = phoneInfo.get("phoneNumber").toString();
+                // 把手机号存到数据库中
+                user.setPhone(phone);
+                userService.updateById(user);
+                return R.success(phoneNumber);
+            }
+        }
+
+        return R.error("系统繁忙，请稍后重试");
     }
 }

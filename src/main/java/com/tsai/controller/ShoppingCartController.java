@@ -38,7 +38,7 @@ public class ShoppingCartController {
         // 设置查询条件： 根据用户id、菜品id|套餐id、口味数据 去查询
         LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ShoppingCart::getUserId,userId);
-        queryWrapper.eq(dishFlavor != null, ShoppingCart::getDishFlavor, dishFlavor);
+        queryWrapper.eq(ShoppingCart::getDishFlavor, dishFlavor);
 
         Long dishId = shoppingCart.getDishId();
         if (dishId != null) {
