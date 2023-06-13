@@ -18,7 +18,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -57,12 +60,20 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
                 throw new CustomException("用户地址信息有误，不能下单");
             }
         }
+        LocalDateTime now = LocalDateTime.now();
+        String today = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println("今天是"+today);
+        LambdaQueryWrapper<Orders> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.like(Orders::getOrderTime,today);
+        int count = ordersService.count(lambdaQueryWrapper);
+
 
         // 生成订单号
         long orderId = IdWorker.getId();
         // 设置订单号和下单时间
         orders.setId(orderId);
-        orders.setOrderTime(LocalDateTime.now());
+        orders.setOrderTime(now);
+        orders.setCode(String.format("%04d",(count+1)));
 
         AtomicInteger amount = new AtomicInteger(0);
 
@@ -89,7 +100,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
 
 
-        if(type == 2) {
+//        if(type == 2) {
             // 获取用户信息
 //            User user = userService.getById(userId);
 //            orders.setUserName(user.getName());
@@ -99,7 +110,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 //                    + (addressBook.getCityName() == null ? "" : addressBook.getCityName())
 //                    + (addressBook.getDistrictName() == null ? "" : addressBook.getDistrictName())
 //                    + (addressBook.getDetail() == null ? "" : addressBook.getDetail()));
-        }
+//        }
 
 
         //向订单表插入数据，一条数据
@@ -111,5 +122,19 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         //清空购物车数据
         shoppingCartService.remove(queryWrapper);
         return orders;
+    }
+
+    @Override
+    public double sumAll(String time) {
+        LambdaQueryWrapper<Orders> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(Orders::getOrderTime, time);
+        List<Orders> list = ordersService.list(queryWrapper);
+
+        AtomicInteger sum = new AtomicInteger(0);
+        for (Orders order : list) {
+            sum.addAndGet(order.getAmount().intValue());
+        }
+
+        return sum.intValue();
     }
 }

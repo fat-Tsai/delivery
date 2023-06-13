@@ -5,20 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d7363ad-d765-44db-baff-580b3aef5d3e" name="Changes" comment="退出功能完成">
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/common/BaseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/common/BaseContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/common/R.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/common/R.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/interceptors/JWTInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/interceptors/JWTInterceptor.java" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/utils/QiniuUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/AddressBookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/dto/orderDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/entity/AddressBook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/entity/BackOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/mapper/AddressBookMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/service/AddressBookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/service/impl/AddressBookServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tsai/utils/MyDateUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/config/WebMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/config/WebMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/CommonController.java" afterDir="false" />
->>>>>>> upload
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/utils/JWTUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/utils/JWTUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/OrderDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/OrderDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/OrdersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/OrdersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/service/OrdersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/service/OrdersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tsai/service/impl/OrdersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tsai/service/impl/OrdersServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/tsai/delivery/DeliveryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/tsai/delivery/DeliveryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +66,7 @@
     </option>
   </component>
   <component name="MavenRunner">
+    <option name="delegateBuildToMaven" value="true" />
     <option name="vmOptions" value="-DarchetyprCatalog=internal" />
   </component>
   <component name="ProjectId" id="2Eh93DcNJodWYPLCc0We7ZeV7vL" />
@@ -91,7 +94,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;7108537956afa2a526f96cc9da7b0c36&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -202,12 +205,29 @@
       <workItem from="1667174919761" duration="7948000" />
       <workItem from="1667261336697" duration="14359000" />
       <workItem from="1667311116451" duration="43016000" />
-<<<<<<< HEAD
       <workItem from="1667521142368" duration="10778000" />
-=======
       <workItem from="1667521142368" duration="5788000" />
       <workItem from="1667693765132" duration="16961000" />
->>>>>>> upload
+      <workItem from="1677211381601" duration="1049000" />
+      <workItem from="1677218100959" duration="769000" />
+      <workItem from="1677218940707" duration="1329000" />
+      <workItem from="1677224019543" duration="607000" />
+      <workItem from="1677231483155" duration="306000" />
+      <workItem from="1677316511860" duration="4811000" />
+      <workItem from="1677425680155" duration="3537000" />
+      <workItem from="1677464361968" duration="51000" />
+      <workItem from="1677466482547" duration="2241000" />
+      <workItem from="1677509185441" duration="628000" />
+      <workItem from="1677635253383" duration="611000" />
+      <workItem from="1677662844015" duration="19000" />
+      <workItem from="1677683258095" duration="5795000" />
+      <workItem from="1677717027272" duration="20000" />
+      <workItem from="1677763041057" duration="2417000" />
+      <workItem from="1677850548315" duration="6112000" />
+      <workItem from="1678064033045" duration="9000" />
+      <workItem from="1678349398922" duration="766000" />
+      <workItem from="1678459762437" duration="761000" />
+      <workItem from="1679208593094" duration="1536000" />
     </task>
     <task id="LOCAL-00001" summary="项目搭建">
       <created>1663208102366</created>
@@ -246,6 +266,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="退出功能完成" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tsai/controller/AddressBookController.java</url>
+          <line>61</line>
+          <properties class="com.tsai.controller.AddressBookController" method="get">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="returnValue" />

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @RestController
 @RequestMapping("/orderDetail")
 public class OrderDetailController {
@@ -21,28 +22,29 @@ public class OrderDetailController {
 
     /**
      * 获取某个订单下的所有菜品图片列表
+     *
      * @param orderId
      * @return
      */
     @GetMapping("imgList")
     public R<List> imgList(String orderId) {
         LambdaQueryWrapper<OrderDetail> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(OrderDetail::getOrderId,orderId);
-        System.out.println("订单id："+orderId);
+        wrapper.eq(OrderDetail::getOrderId, orderId);
+        System.out.println("订单id：" + orderId);
         List<OrderDetail> orderDetails = orderDetailService.list(wrapper);
-        System.out.println("订单列表："+orderDetails);
+        System.out.println("订单列表：" + orderDetails);
         List<String> list = orderDetails.stream().map((item) -> {
             String imgUrl = item.getImage();
             return imgUrl;
         }).collect(Collectors.toList());
-        System.out.println("图片列表："+list);
+        System.out.println("图片列表：" + list);
         return R.success(list);
     }
 
     @GetMapping("/list")
     public R<List> list(String orderId) {
         LambdaQueryWrapper<OrderDetail> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(OrderDetail::getOrderId,orderId);
+        wrapper.eq(OrderDetail::getOrderId, orderId);
         List<OrderDetail> list = orderDetailService.list(wrapper);
         return R.success(list);
     }

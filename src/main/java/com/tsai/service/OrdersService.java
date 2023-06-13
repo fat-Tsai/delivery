@@ -5,4 +5,6 @@ import com.tsai.entity.Orders;
 
 public interface OrdersService extends IService<Orders> {
     Orders submit(Orders orders);
+
+    double sumAll(String item);
 }

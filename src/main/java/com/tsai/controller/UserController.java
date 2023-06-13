@@ -4,12 +4,15 @@ import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tsai.common.R;
 import com.tsai.dto.UserDto;
+import com.tsai.entity.Employee;
 import com.tsai.entity.User;
 import com.tsai.service.UserService;
 import com.tsai.utils.JWTUtils;
 import com.tsai.utils.WXUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -157,11 +161,6 @@ public class UserController {
         return R.error("获取手机号失败");
     }
 
-    @PostMapping("/test")
-    public R<String> test(String code) {
-        return R.success(code);
-    }
-
     /**
      * 获取用户手机号
      * @param request
@@ -209,4 +208,32 @@ public class UserController {
 
         return R.error("系统繁忙，请稍后重试");
     }
+
+    /**
+     * 获取用户信息列表
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/page")
+    public R<Page> page(int page, int pageSize, String name, String phone) {
+
+        // 1. 构造分页构造器
+        Page pageInfo = new Page(page,pageSize);
+
+        // 2. 构造条件构造器
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper();
+        // 2-1. 添加过滤条件
+        queryWrapper.like(StringUtils.isNotEmpty(name), User::getNickName,name);
+        queryWrapper.like(phone!= null, User::getPhone, phone);
+        // 2-2. 添加排序条件
+        queryWrapper.orderByDesc(User::getCreateTime);
+
+        // 3. 执行查询
+        userService.page(pageInfo,queryWrapper);
+
+        return R.success(pageInfo);
+    }
+
 }

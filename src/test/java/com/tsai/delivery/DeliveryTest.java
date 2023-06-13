@@ -11,11 +11,23 @@ import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 import com.tsai.common.BaseContext;
 import com.tsai.utils.JWTUtils;
+import com.tsai.utils.MyDateUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 public class DeliveryTest {
+    /**
+     * 测试能否获取近七日的数据
+     */
+    @Test
+    public void getSevenDays() {
+        List<String> sevenDate = MyDateUtils.getSevenDate();
+        System.out.println(sevenDate);
+        System.out.println(sevenDate.get(2));
+    }
 
     /**
      * 测试能否正确拿到id:用于更新和插入
